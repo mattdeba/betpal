@@ -12,4 +12,8 @@ export class RestDataSource {
       { firstName: pseudo },
     ));
   }
+
+  async getBetsFromUser(firstName: string): Promise<any> {
+    return firstValueFrom(this.http.get(`${this.baseUrl}/bets?firstName=${firstName}`))
+  }
 }

@@ -25,7 +25,7 @@ export class LoginComponent {
       const user = await this.dataSource.getUser(this.pseudo);
       if (user) {
         this.authService.setUser(user);
-        await this.router.navigate(['/home'])
+        await this.router.navigate(['/mybets'])
       }
     } catch (e) {
       console.log(e);

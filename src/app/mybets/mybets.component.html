@@ -1,0 +1,14 @@
+<h2>Mes paris</h2>
+<div *ngIf="bets.length > 0">
+  <ul>
+    <li *ngFor="let bet of bets">
+      <h3>Assertion: {{ bet.assertion }}</h3>
+      <p>Montant: {{ bet.amount }}</p>
+      <p>Cible: {{ bet.target }}</p>
+      <p>Assertion correcte: {{ bet.assertionCorrect ? 'Oui' : 'Non' }}</p>
+      <p>Fermé: {{ bet.closed ? 'Oui' : 'Non' }}</p>
+      <p>Créé par: {{ bet.createdBy.firstName }} {{ bet.createdBy.lastName }}</p>
+      <p>Accepté par: {{ bet.acceptedBy ? bet.acceptedBy.firstName + ' ' + bet.acceptedBy.lastName : '' }}</p>
+    </li>
+  </ul>
+</div>
