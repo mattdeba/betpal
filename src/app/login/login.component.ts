@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RestDataSource } from '../model/rest.datasource';
 import { ModelModule } from '../model/model.module';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +15,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   pseudo: string;
-  user: any;
 
-  constructor(private dataSource: RestDataSource, private router: Router) { }
+  constructor(private dataSource: RestDataSource,
+              private router: Router,
+              private authService: AuthenticationService) { }
 
   async onSubmit() {
     try {
       const user = await this.dataSource.getUser(this.pseudo);
       if (user) {
-        this.user = user;
+        this.authService.setUser(user);
         await this.router.navigate(['/home'])
       }
     } catch (e) {
