@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RestDataSource } from '../model/rest.datasource';
 import { AuthenticationService } from '../services/authentication.service';
 import { ModelModule } from '../model/model.module';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-mybets',
   standalone: true,
-  imports: [CommonModule, ModelModule],
+  imports: [CommonModule, ModelModule, RouterLink],
   templateUrl: './mybets.component.html',
   styleUrl: './mybets.component.css'
 })

@@ -1,14 +1,18 @@
-<h2>Mes paris</h2>
-<div *ngIf="bets.length > 0">
-  <ul>
-    <li *ngFor="let bet of bets">
-      <h3>Assertion: {{ bet.assertion }}</h3>
-      <p>Montant: {{ bet.amount }}</p>
-      <p>Cible: {{ bet.target }}</p>
-      <p>Assertion correcte: {{ bet.assertionCorrect ? 'Oui' : 'Non' }}</p>
-      <p>Fermé: {{ bet.closed ? 'Oui' : 'Non' }}</p>
-      <p>Créé par: {{ bet.createdBy.firstName }} {{ bet.createdBy.lastName }}</p>
-      <p>Accepté par: {{ bet.acceptedBy ? bet.acceptedBy.firstName + ' ' + bet.acceptedBy.lastName : '' }}</p>
-    </li>
-  </ul>
+<div class='main-content'>
+  <h2>Mes paris</h2>
+  <div class='create-button'>
+    <button  routerLink="/mybets/create">Créer un pari</button>
+  </div>
+  <div *ngIf="bets.length > 0">
+    <ul class="bet-list">
+      <li *ngFor="let bet of bets" class="bet-item">
+        <h3>Pari #{{bet.id}}: {{ bet.assertion }}</h3>
+        <p>Montant: {{ bet.amount }}</p>
+        <p>Cible: {{ bet.target }}</p>
+        <p>Assertion correcte: {{ bet.assertionCorrect === null ? 'A venir' : (bet.assertionCorrect ? 'Oui' : 'Non') }}</p>
+        <p>Fermé: {{ bet.closed ? 'Oui' : 'Non' }}</p>
+        <p>Accepté par: {{ bet.acceptedBy ? bet.acceptedBy.firstName + ' ' + bet.acceptedBy.lastName : '' }}</p>
+      </li>
+    </ul>
+  </div>
 </div>

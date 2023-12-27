@@ -1,0 +1,36 @@
+.bet-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bet-item {
+  border: 1px solid black;
+  margin-bottom: 10px;
+  padding: 2px;
+  width: 50%;
+}
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.create-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 50%;
+}
