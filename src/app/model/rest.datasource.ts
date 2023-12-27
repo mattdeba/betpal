@@ -18,7 +18,6 @@ export class RestDataSource {
   }
 
   async createBet(formInput: any) {
-    console.log(formInput);
     return firstValueFrom(this.http.post(`${this.baseUrl}/bets`, formInput));
   }
 }

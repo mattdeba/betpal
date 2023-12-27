@@ -23,7 +23,6 @@ export class MybetsComponent {
     const user = this.authService.getUser();
     if (user) {
       this.bets = await this.dataSource.getBetsFromUser(user.firstName);
-      console.log(this.bets);
     }
   }
 }
