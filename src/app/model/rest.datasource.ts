@@ -28,4 +28,8 @@ export class RestDataSource {
   async updateBet(bet: any): Promise<any> {
     return firstValueFrom(this.http.patch(`${this.baseUrl}/bets/${bet.id}`, bet));
   }
+
+  async deleteBet(id: string): Promise<any> {
+    return firstValueFrom(this.http.delete(`${this.baseUrl}/bets/${id}`));
+  }
 }

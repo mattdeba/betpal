@@ -25,4 +25,9 @@ export class MybetsComponent {
       this.bets = await this.dataSource.getBetsFromUser(user.firstName);
     }
   }
+
+  async deleteBet(id: string) {
+    await this.dataSource.deleteBet(id);
+    this.bets = await this.dataSource.getBetsFromUser(this.authService.getUser().firstName);
+  }
 }

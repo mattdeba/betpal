@@ -13,6 +13,7 @@
         <p>Fermé: {{ bet.closed ? 'Oui' : 'Non' }}</p>
         <p>Accepté par: {{ bet.acceptedBy ? bet.acceptedBy.firstName + ' ' + bet.acceptedBy.lastName : '' }}</p>
         <button [routerLink]="['/mybets/edit', bet.id]">Modifier le pari</button>
+        <button *ngIf="!bet.closed" (click)="deleteBet(bet.id)">Supprimer le pari</button>
       </li>
     </ul>
   </div>
