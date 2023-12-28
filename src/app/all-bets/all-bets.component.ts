@@ -24,8 +24,18 @@ export class AllBetsComponent {
     if (user) {
       this.userBets = await this.dataSource.getBetsFromUser(user.firstName);
       const allBets = await this.dataSource.getAllBets();
-      console.log(this.userBets);
-      console.log(allBets);
       this.allBets = allBets.filter((bet: any) => !this.userBets.map(bet => bet.id).includes(bet.id));    }
+  }
+
+  async acceptBet(betId: string) {
+    try {
+      const user = this.authService.getUser();
+      if (user) {
+        await this.dataSource.acceptBet(betId, user.email);
+        this.allBets = await this.dataSource.getAllBets();
+      }
+    } catch (error) {
+      console.error('Error accepting bet:', error);
+    }
   }
 }

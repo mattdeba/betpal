@@ -9,6 +9,8 @@
         <p>Assertion correcte: {{ bet.assertionCorrect === null ? 'A venir' : (bet.assertionCorrect ? 'Oui' : 'Non') }}</p>
         <p>Fermé: {{ bet.closed ? 'Oui' : 'Non' }}</p>
         <p>Créé par: {{ bet.createdBy ? bet.createdBy.firstName + ' ' + bet.createdBy.lastName : '' }}</p>
+        <p>Accepté par: {{ bet.acceptedBy ? bet.acceptedBy.firstName + ' ' + bet.acceptedBy.lastName : 'Pas encore accepté' }}</p>
+        <button *ngIf="!bet.acceptedBy" (click)="acceptBet(bet.id)">Accepter</button>
       </li>
     </ul>
   </div>

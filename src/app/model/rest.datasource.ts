@@ -36,4 +36,8 @@ export class RestDataSource {
   async getAllBets(): Promise<any> {
     return firstValueFrom(this.http.get(`${this.baseUrl}/bets`));
   }
+
+  async acceptBet(id: string, acceptorEmail: string): Promise<any> {
+  return firstValueFrom(this.http.post(`${this.baseUrl}/bets/${id}/accept`, { acceptorEmail }));
+}
 }
