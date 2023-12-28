@@ -1,0 +1,15 @@
+<div class='main-content'>
+  <h2>Tous les paris</h2>
+  <div *ngIf="allBets.length > 0">
+    <ul class="bet-list">
+      <li *ngFor="let bet of allBets" class="bet-item">
+        <h3>Pari #{{bet.id}}: {{ bet.assertion }}</h3>
+        <p>Montant: {{ bet.amount }}</p>
+        <p>Cible: {{ bet.target }}</p>
+        <p>Assertion correcte: {{ bet.assertionCorrect === null ? 'A venir' : (bet.assertionCorrect ? 'Oui' : 'Non') }}</p>
+        <p>Fermé: {{ bet.closed ? 'Oui' : 'Non' }}</p>
+        <p>Créé par: {{ bet.createdBy ? bet.createdBy.firstName + ' ' + bet.createdBy.lastName : '' }}</p>
+      </li>
+    </ul>
+  </div>
+</div>

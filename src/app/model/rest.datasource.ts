@@ -32,4 +32,8 @@ export class RestDataSource {
   async deleteBet(id: string): Promise<any> {
     return firstValueFrom(this.http.delete(`${this.baseUrl}/bets/${id}`));
   }
+
+  async getAllBets(): Promise<any> {
+    return firstValueFrom(this.http.get(`${this.baseUrl}/bets`));
+  }
 }
