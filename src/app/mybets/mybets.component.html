@@ -12,6 +12,7 @@
         <p>Assertion correcte: {{ bet.assertionCorrect === null ? 'A venir' : (bet.assertionCorrect ? 'Oui' : 'Non') }}</p>
         <p>Fermé: {{ bet.closed ? 'Oui' : 'Non' }}</p>
         <p>Accepté par: {{ bet.acceptedBy ? bet.acceptedBy.firstName + ' ' + bet.acceptedBy.lastName : '' }}</p>
+        <button [routerLink]="['/mybets/edit', bet.id]">Modifier le pari</button>
       </li>
     </ul>
   </div>

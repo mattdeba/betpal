@@ -1,0 +1,24 @@
+<div class='main-content'>
+  <h2>Modifier un pari</h2>
+  <form (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-field">
+      <label>
+        Libellé du pari:
+        <input [(ngModel)]="bet.assertion" type="text" name="assertion" required>
+      </label>
+    </div>
+    <div class="form-field">
+      <label>
+        Montant misé:
+        <input [(ngModel)]="bet.amount" type="number" min="0" name="betAmount" required>
+      </label>
+    </div>
+    <div class="form-field">
+      <label>
+        Montant souhaité:
+        <input [(ngModel)]="bet.desiredAmount" type="number" min="0" name="desiredAmount" required>
+      </label>
+    </div>
+    <button type="submit">Valider</button>
+  </form>
+</div>

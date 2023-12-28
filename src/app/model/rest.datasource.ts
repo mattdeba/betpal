@@ -20,4 +20,12 @@ export class RestDataSource {
   async createBet(formInput: any) {
     return firstValueFrom(this.http.post(`${this.baseUrl}/bets`, formInput));
   }
+
+  async getBet(id: string): Promise<any> {
+    return firstValueFrom(this.http.get(`${this.baseUrl}/bets/${id}`));
+  }
+
+  async updateBet(bet: any): Promise<any> {
+    return firstValueFrom(this.http.patch(`${this.baseUrl}/bets/${bet.id}`, bet));
+  }
 }
