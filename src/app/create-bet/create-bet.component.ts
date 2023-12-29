@@ -31,6 +31,8 @@ export class CreateBetComponent {
       creatorEmail: this.authService.getUser().email,
     }
     await this.dataSource.createBet(formInput);
+    const updatedUser = await this.dataSource.getUser(this.authService.getUser().firstName);
+    this.authService.setUser(updatedUser);
     await this.router.navigateByUrl('/mybets');
   }
 }
