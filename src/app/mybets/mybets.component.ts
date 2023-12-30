@@ -28,6 +28,8 @@ export class MybetsComponent {
 
   async deleteBet(id: string) {
     await this.dataSource.deleteBet(id);
+    const updatedUser = await this.dataSource.getUser(this.authService.getUser().firstName);
+    this.authService.setUser(updatedUser);
     this.bets = await this.dataSource.getBetsFromUser(this.authService.getUser().firstName);
   }
 }
