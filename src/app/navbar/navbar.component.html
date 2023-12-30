@@ -1,29 +1,67 @@
-<div class='navbar'>
+<div class='navbar' >
   <div class="left-side">
-    <li class="nav-item">
+    <li class='nav-item' *ngIf="isMobile">
+      <button (click)="toggleExpand()"><i class="fa-solid fa-bars"></i></button>
+    </li>
+    <li class="nav-item" *ngIf="!isMobile">
       <a class="nav-link"
          routerLink="/home">Home
       </a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="!isMobile">
       <a class="nav-link"
          routerLink="/mybets">Mes paris
       </a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="!isMobile">
       <a class="nav-link"
          routerLink="/allbets">Tous les paris
       </a>
     </li>
   </div>
-  <div class="right-side">
+  <div class="right-side" *ngIf="!isMobile">
     <li class="nav-item" *ngIf="!authService.isLoggedIn()">
       <a class="nav-link"
          routerLink="/login">Se connecter
       </a>
     </li>
-    <li *ngIf="authService.isLoggedIn()">
-      mon score: {{score}}
+    <li class='score' *ngIf="authService.isLoggedIn()">
+      score: {{score}}
+    </li>
+  </div>
+</div>
+
+
+<div class='sidenav' *ngIf="isMobile">
+  <div class="left-side">
+    <li class="nav-item" *ngIf="isExpanded">
+      <a class="nav-link"
+         routerLink="/home"
+         (click)="closeSidenav()">Home
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="isExpanded">
+      <a class="nav-link"
+         routerLink="/mybets"
+         (click)="closeSidenav()">Mes paris
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="isExpanded">
+      <a class="nav-link"
+         routerLink="/allbets"
+         (click)="closeSidenav()">Tous les paris
+      </a>
+    </li>
+  </div>
+  <div class="right-side" *ngIf="isExpanded">
+    <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+      <a class="nav-link"
+         routerLink="/login"
+         (click)="closeSidenav()">Se connecter
+      </a>
+    </li>
+    <li class='score' *ngIf="authService.isLoggedIn()">
+      score: {{score}}
     </li>
   </div>
 </div>

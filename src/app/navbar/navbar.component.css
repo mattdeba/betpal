@@ -28,3 +28,59 @@
   flex-direction: row; /* Changed from column to row */
   align-items: center;
 }
+
+.sidenav .left-side,
+.sidenav .right-side {
+  display: flex;
+  flex-direction: column; /* Disposer les éléments en colonne */
+  align-items: flex-start; /* Aligner les éléments au début du conteneur */
+  background-color: black;
+  list-style-type: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5em;
+
+}
+
+.sidenav .nav-item {
+  margin-bottom: 10px; /* Ajouter une marge en bas de chaque élément pour les espacer */
+}
+
+.sidenav .nav-link {
+  color: white; /* Lien en blanc */
+  text-decoration: none; /* Pas de soulignement pour les liens */
+}
+
+.sidenav .nav-link:hover {
+  color: yellow; /* Changement de couleur au survol */
+}
+
+.score {
+  color: white;
+}
+
+.sidenav {
+  position: fixed;
+  z-index: 1000;
+  height: 100vh;
+  transform: translateX(-100%);
+  transition: transform 0.1s ease-in-out;
+  box-sizing: border-box;
+  background-color: black;
+}
+
+.sidenav.isExpanded {
+  transform: translateX(0);
+}
+
+.fa-bars {
+  font-size: 2em; /* Ajustez la taille de l'icône */
+  color: white; /* Couleur de l'icône */
+  background-color: black; /* Couleur de fond de l'icône */
+  padding: 5px; /* Espace autour de l'icône */
+}
+
+button {
+  background-color: black; /* Couleur de fond du bouton */
+  border: none; /* Pas de bordure */
+  cursor: pointer;
+}
