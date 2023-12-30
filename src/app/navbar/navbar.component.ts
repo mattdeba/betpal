@@ -13,7 +13,7 @@ import { AuthenticationService } from '../services/authentication.service';
 export class NavbarComponent {
   score: number;
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(public authService: AuthenticationService) { }
 
   ngOnInit() {
     this.authService.user$.subscribe(user => {

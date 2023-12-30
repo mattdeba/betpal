@@ -17,4 +17,8 @@ export class AuthenticationService {
     return this.userSubject.value;
   }
 
+  isLoggedIn() {
+    return this.getUser() !== null;
+  }
+
 }
