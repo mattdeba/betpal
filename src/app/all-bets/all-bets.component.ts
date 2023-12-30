@@ -32,6 +32,8 @@ export class AllBetsComponent {
       const user = this.authService.getUser();
       if (user) {
         await this.dataSource.acceptBet(betId, user.email);
+        const updatedUser = await this.dataSource.getUser(user.firstName);
+        this.authService.setUser(updatedUser);
         this.allBets = await this.dataSource.getAllBets();
       }
     } catch (error) {
