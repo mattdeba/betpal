@@ -3,10 +3,10 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
-app.use('/', express.static('./dist/betpal'));
+app.use('/', express.static(path.join(__dirname, 'dist', 'betpal')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/dist/betpal/browser/index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'betpal', 'index.html'));
 });
 
 app.listen(80, () => console.log('HTTP Server running on port 80'));
