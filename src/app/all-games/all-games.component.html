@@ -1,5 +1,5 @@
 <div class='main-content'>
-  <h2>Matchs à venir</h2>
+  <h2>Tous les matchs</h2>
   <div *ngIf="allGames.length > 0">
     <ul class="game-list">
       <li *ngFor="let game of allGames" class="game-item">
@@ -8,15 +8,17 @@
         <p>Score de {{game.homeTeam}}: {{ game.homeTeamScore !== null ? game.homeTeamScore : 'A venir' }}</p>
         <p>Score de {{game.awayTeam}}: {{ game.awayTeamScore !== null ? game.awayTeamScore : 'A venir' }}</p>
         <p>Terminé: {{ game.isClosed ? 'Oui' : 'Non' }}</p>
-        <form (ngSubmit)="createBet(game.id, betAmount.value, desiredAmount.value, chosenTeam.value)">
-          <input #betAmount type="number" placeholder="Montant du pari" required>
-          <input #desiredAmount type="number" placeholder="Montant souhaité" required>
-          <select #chosenTeam required>
-            <option [value]="game.homeTeam">{{game.homeTeam}}</option>
-            <option [value]="game.awayTeam">{{game.awayTeam}}</option>
-          </select>
-          <button type="submit">Créer un pari</button>
-        </form>
+        <div *ngIf="!game.isClosed">
+          <form (ngSubmit)="createBet(game.id, betAmount.value, desiredAmount.value, chosenTeam.value)" >
+            <input #betAmount type="number" placeholder="Montant du pari" required>
+            <input #desiredAmount type="number" placeholder="Montant souhaité" required>
+            <select #chosenTeam required>
+              <option [value]="game.homeTeam">{{game.homeTeam}}</option>
+              <option [value]="game.awayTeam">{{game.awayTeam}}</option>
+            </select>
+            <button type="submit">Créer un pari</button>
+          </form>
+        </div>
       </li>
     </ul>
   </div>

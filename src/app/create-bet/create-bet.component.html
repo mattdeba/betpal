@@ -3,10 +3,21 @@
   <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="form-container">
     <div class="form-field">
       <label>
-        Libellé du pari:
-        <input [(ngModel)]="assertion" type="text" name="assertion" required>
+        Choisissez un match:
+        <select [(ngModel)]="selectedGame" name="selectedGame" required>
+          <option *ngFor="let game of allGames" [ngValue]="game">{{game.homeTeam}} VS {{game.awayTeam}}</option>
+        </select>
       </label>
     </div>
+  <div class="form-field">
+    <label>
+      Choisissez l'équipe gagnante:
+      <select [(ngModel)]="selectedTeam" name="selectedTeam" required>
+        <option *ngIf="selectedGame" [value]="selectedGame.homeTeam">{{selectedGame.homeTeam}}</option>
+        <option *ngIf="selectedGame" [value]="selectedGame.awayTeam">{{selectedGame.awayTeam}}</option>
+      </select>
+    </label>
+  </div>
     <div class="form-field">
       <label>
         Montant misé:

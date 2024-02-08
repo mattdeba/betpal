@@ -20,12 +20,14 @@ export class AllGamesComponent {
 
   async ngOnInit() {
     this.allGames = await this.dataSource.getAllGames();
-    console.log(this.allGames);
   }
 
   async createBet(gameId: string, betAmount: string, desiredAmount: string, chosenTeam: string) {
     try {
       const user = this.authService.getUser();
+      if (!user) {
+        alert("veuillez vous connecter");
+      }
       const currentGame = this.allGames.filter((g) => g.id === gameId)[0];
       if (user) {
         const payload = {

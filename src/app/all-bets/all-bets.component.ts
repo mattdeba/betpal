@@ -30,6 +30,9 @@ export class AllBetsComponent {
   async acceptBet(betId: string) {
     try {
       const user = this.authService.getUser();
+      if (!user) {
+        alert("veuillez vous connecter");
+      }
       if (user) {
         await this.dataSource.acceptBet(betId, user.email);
         const updatedUser = await this.dataSource.getUser(user.firstName);

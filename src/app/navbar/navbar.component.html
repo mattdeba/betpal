@@ -20,8 +20,11 @@
     </li>
     <li class="nav-item" *ngIf="!isMobile">
       <a class="nav-link"
-         routerLink="/allgames">Matchs à venir
+         routerLink="/allgames">Tous les matchs
       </a>
+    </li>
+    <li class='score' *ngIf="authService.isLoggedIn()">
+      {{authService.getUser().firstName}}: {{score}} €
     </li>
   </div>
   <div class="right-side" *ngIf="!isMobile">
@@ -30,8 +33,8 @@
          routerLink="/login">Se connecter
       </a>
     </li>
-    <li class='score' *ngIf="authService.isLoggedIn()">
-      score: {{score}}
+    <li class="nav-item" *ngIf="authService.isLoggedIn()">
+      <span class="nav-link" (click)="authService.logout()">Se déconnecter</span>
     </li>
   </div>
 </div>
@@ -60,8 +63,11 @@
     <li class="nav-item" *ngIf="isExpanded">
       <a class="nav-link"
          routerLink="/allgames"
-         (click)="closeSidenav()">Matchs à venir
+         (click)="closeSidenav()">Tous les matchs
       </a>
+    </li>
+    <li class='score' *ngIf="authService.isLoggedIn()">
+      {{authService.getUser().firstName}}: {{score}} €
     </li>
   </div>
   <div class="right-side" *ngIf="isExpanded">
@@ -71,8 +77,8 @@
          (click)="closeSidenav()">Se connecter
       </a>
     </li>
-    <li class='score' *ngIf="authService.isLoggedIn()">
-      score: {{score}}
+    <li class="nav-item" *ngIf="authService.isLoggedIn()">
+      <span class="nav-link" (click)="authService.logout()">Se déconnecter</span>
     </li>
   </div>
 </div>
