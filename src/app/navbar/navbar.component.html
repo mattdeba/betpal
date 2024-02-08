@@ -18,6 +18,11 @@
          routerLink="/allbets">Tous les paris
       </a>
     </li>
+    <li class="nav-item" *ngIf="!isMobile">
+      <a class="nav-link"
+         routerLink="/allgames">Matchs à venir
+      </a>
+    </li>
   </div>
   <div class="right-side" *ngIf="!isMobile">
     <li class="nav-item" *ngIf="!authService.isLoggedIn()">
@@ -50,6 +55,12 @@
       <a class="nav-link"
          routerLink="/allbets"
          (click)="closeSidenav()">Tous les paris
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="isExpanded">
+      <a class="nav-link"
+         routerLink="/allgames"
+         (click)="closeSidenav()">Matchs à venir
       </a>
     </li>
   </div>
