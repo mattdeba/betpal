@@ -1,5 +1,5 @@
 <div class='main-content'>
-  <h2>Tous les matchs</h2>
+  <h2>Matchs à venir</h2>
   <div *ngIf="allGames.length > 0">
     <ul class="game-list">
       <li *ngFor="let game of allGames" class="game-item">
@@ -27,7 +27,7 @@
   <div class="game-container">
     <div class="match-container">
       <div class="team left-team">
-        <img src="assets/MIA.png" alt="Miami Heat Logo" class="team-logo">
+        <img src="{{logUrls.MIA}}" alt="Miami Heat Logo" class="team-logo">
         <div class="team-info">
           <div class="team-name">Heat</div>
         </div>
@@ -39,181 +39,7 @@
       </div>
 
       <div class="team right-team">
-        <img src="assets/DET.png" alt="Detroit Pistons Logo" class="team-logo">
-        <div class="team-info">
-          <div class="team-name">Pistons</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bet-container">
-      <div class="ratio-container">
-        <div class="amount-container">
-          <div class="ratio">
-            <div class="left">70%</div>
-            <div class="center-item">Rapport</div>
-            <div class="right">30%</div>
-          </div>
-        </div>
-        <div class="input-container">
-          <input type="range" min="1" max="99" value="50" class="slider" id="myRange">
-        </div>
-        <div class="amount-container">
-          <div class="ratio-bottom">
-            <div class="left"><button class="selected">1,42</button></div>
-            <div class="center-item-bottom">Côte</div>
-            <div class="right"><button>3,33</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="bet-slip">
-        <div class="bet-section input-section">
-          <div class="bet-label">Mise</div>
-          <div class="bet-input-container">
-            <input type="number" class="bet-input" value="20">
-            <div class="bet-unit">€</div>
-          </div>
-        </div>
-        <div class="bet-section">
-          <div class="bet-label">Gains potentiels</div>
-          <div class="bet-amount">23,40 €</div>
-        </div>
-        <button class="create-bet">Créer mon pari</button>
-      </div>
-    </div>
-  </div>
-  <div class="game-container">
-    <div class="match-container">
-      <div class="team left-team">
-        <img src="assets/MIA.png" alt="Miami Heat Logo" class="team-logo">
-        <div class="team-info">
-          <div class="team-name">Heat</div>
-        </div>
-      </div>
-
-      <div class="match-info">
-        <div class="time">Demain</div>
-        <div class="date">00:45</div>
-      </div>
-
-      <div class="team right-team">
-        <img src="assets/DET.png" alt="Detroit Pistons Logo" class="team-logo">
-        <div class="team-info">
-          <div class="team-name">Pistons</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bet-container">
-      <div class="ratio-container">
-        <div class="amount-container">
-          <div class="ratio">
-            <div class="left">70%</div>
-            <div class="center-item">Rapport</div>
-            <div class="right">30%</div>
-          </div>
-        </div>
-        <div class="input-container">
-          <input type="range" min="1" max="99" value="50" class="slider" id="myRange">
-        </div>
-        <div class="amount-container">
-          <div class="ratio-bottom">
-            <div class="left"><button class="selected">1,42</button></div>
-            <div class="center-item-bottom">Côte</div>
-            <div class="right"><button>3,33</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="bet-slip">
-        <div class="bet-section input-section">
-          <div class="bet-label">Mise</div>
-          <div class="bet-input-container">
-            <input type="number" class="bet-input" value="20">
-            <div class="bet-unit">€</div>
-          </div>
-        </div>
-        <div class="bet-section">
-          <div class="bet-label">Gains potentiels</div>
-          <div class="bet-amount">23,40 €</div>
-        </div>
-        <button class="create-bet">Créer mon pari</button>
-      </div>
-    </div>
-  </div>
-  <div class="game-container">
-    <div class="match-container">
-      <div class="team left-team">
-        <img src="assets/MIA.png" alt="Miami Heat Logo" class="team-logo">
-        <div class="team-info">
-          <div class="team-name">Heat</div>
-        </div>
-      </div>
-
-      <div class="match-info">
-        <div class="time">Demain</div>
-        <div class="date">00:45</div>
-      </div>
-
-      <div class="team right-team">
-        <img src="assets/DET.png" alt="Detroit Pistons Logo" class="team-logo">
-        <div class="team-info">
-          <div class="team-name">Pistons</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bet-container">
-      <div class="ratio-container">
-        <div class="amount-container">
-          <div class="ratio">
-            <div class="left">70%</div>
-            <div class="center-item">Rapport</div>
-            <div class="right">30%</div>
-          </div>
-        </div>
-        <div class="input-container">
-          <input type="range" min="1" max="99" value="50" class="slider" id="myRange">
-        </div>
-        <div class="amount-container">
-          <div class="ratio-bottom">
-            <div class="left"><button class="selected">1,42</button></div>
-            <div class="center-item-bottom">Côte</div>
-            <div class="right"><button>3,33</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="bet-slip">
-        <div class="bet-section input-section">
-          <div class="bet-label">Mise</div>
-          <div class="bet-input-container">
-            <input type="number" class="bet-input" value="20">
-            <div class="bet-unit">€</div>
-          </div>
-        </div>
-        <div class="bet-section">
-          <div class="bet-label">Gains potentiels</div>
-          <div class="bet-amount">23,40 €</div>
-        </div>
-        <button class="create-bet">Créer mon pari</button>
-      </div>
-    </div>
-  </div>
-  <div class="game-container">
-    <div class="match-container">
-      <div class="team left-team">
-        <img src="assets/MIA.png" alt="Miami Heat Logo" class="team-logo">
-        <div class="team-info">
-          <div class="team-name">Heat</div>
-        </div>
-      </div>
-
-      <div class="match-info">
-        <div class="time">Demain</div>
-        <div class="date">00:45</div>
-      </div>
-
-      <div class="team right-team">
-        <img src="assets/DET.png" alt="Detroit Pistons Logo" class="team-logo">
+        <img src="{{logUrls.DET}}" alt="Detroit Pistons Logo" class="team-logo">
         <div class="team-info">
           <div class="team-name">Pistons</div>
         </div>

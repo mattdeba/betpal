@@ -5,6 +5,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { ModelModule } from '../model/model.module';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { logUrls } from '../../logoUrls';
 
 @Component({
   selector: 'app-all-games',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class AllGamesComponent {
   allGames: any[] = [];
+  logUrls = logUrls;
 
   constructor(private dataSource: RestDataSource, private authService: AuthenticationService, private router: Router) {} // Inject Router
 
