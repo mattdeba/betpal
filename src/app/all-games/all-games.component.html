@@ -1,8 +1,72 @@
+<h2>Matchs à venir</h2>
+<div class="all-games">
+  <ul *ngIf="allGames.length > 0">
+    <li *ngFor="let game of allGames">
+      <div class="game-container">
+        <div class="match-container">
+          <div class="team left-team">
+            <img src="{{getUrlFromKey(game.homeTeam)}}" alt="Miami Heat Logo" class="team-logo">
+            <div class="team-info">
+              <div class="team-name">{{getTeamFromKey(game.homeTeam)}}</div>
+            </div>
+          </div>
+
+          <div class="match-info">
+            <div class="time">{{convertUTCtoParisTime(game.dateTimeUTC)}}</div>
+          </div>
+
+          <div class="team right-team">
+            <img src="{{getUrlFromKey(game.awayTeam)}}" alt="Detroit Pistons Logo" class="team-logo">
+            <div class="team-info">
+              <div class="team-name">{{getTeamFromKey(game.awayTeam)}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bet-container">
+          <div class="ratio-container">
+            <div class="amount-container">
+              <div class="ratio">
+                <div class="left">70%</div>
+                <div class="center-item">Rapport</div>
+                <div class="right">30%</div>
+              </div>
+            </div>
+            <div class="input-container">
+              <input type="range" min="1" max="99" value="50" class="slider" id="myRange">
+            </div>
+            <div class="amount-container">
+              <div class="ratio-bottom">
+                <div class="left"><button class="selected">1,42</button></div>
+                <div class="center-item-bottom">Côte</div>
+                <div class="right"><button>3,33</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="bet-slip">
+            <div class="bet-section input-section">
+              <div class="bet-label">Mise</div>
+              <div class="bet-input-container">
+                <input type="number" class="bet-input" value="20">
+                <div class="bet-unit">€</div>
+              </div>
+            </div>
+            <div class="bet-section">
+              <div class="bet-label">Gains potentiels</div>
+              <div class="bet-amount">23,40 €</div>
+            </div>
+            <button class="create-bet">Créer mon pari</button>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+<!--
 <div class='main-content'>
-  <h2>Matchs à venir</h2>
   <div *ngIf="allGames.length > 0">
     <ul class="game-list">
-      <li *ngFor="let game of allGames" class="game-item">
+      <li *ngFor="let game of [allGames[0]]" class="game-item">
         <h3>Match #{{game.id}}: {{ game.homeTeam }} VS {{ game.awayTeam }}</h3>
         <p>Date et heure: {{ game.dateTimeUTC }}</p>
         <p>Score de {{game.homeTeam}}: {{ game.homeTeamScore !== null ? game.homeTeamScore : 'A venir' }}</p>
@@ -23,63 +87,4 @@
     </ul>
   </div>
 </div>
-<div class="all-games">
-  <div class="game-container">
-    <div class="match-container">
-      <div class="team left-team">
-        <img src="{{logUrls.MIA}}" alt="Miami Heat Logo" class="team-logo">
-        <div class="team-info">
-          <div class="team-name">Heat</div>
-        </div>
-      </div>
-
-      <div class="match-info">
-        <div class="time">Demain</div>
-        <div class="date">00:45</div>
-      </div>
-
-      <div class="team right-team">
-        <img src="{{logUrls.DET}}" alt="Detroit Pistons Logo" class="team-logo">
-        <div class="team-info">
-          <div class="team-name">Pistons</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bet-container">
-      <div class="ratio-container">
-        <div class="amount-container">
-          <div class="ratio">
-            <div class="left">70%</div>
-            <div class="center-item">Rapport</div>
-            <div class="right">30%</div>
-          </div>
-        </div>
-        <div class="input-container">
-          <input type="range" min="1" max="99" value="50" class="slider" id="myRange">
-        </div>
-        <div class="amount-container">
-          <div class="ratio-bottom">
-            <div class="left"><button class="selected">1,42</button></div>
-            <div class="center-item-bottom">Côte</div>
-            <div class="right"><button>3,33</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="bet-slip">
-        <div class="bet-section input-section">
-          <div class="bet-label">Mise</div>
-          <div class="bet-input-container">
-            <input type="number" class="bet-input" value="20">
-            <div class="bet-unit">€</div>
-          </div>
-        </div>
-        <div class="bet-section">
-          <div class="bet-label">Gains potentiels</div>
-          <div class="bet-amount">23,40 €</div>
-        </div>
-        <button class="create-bet">Créer mon pari</button>
-      </div>
-    </div>
-  </div>
-</div>
+-->

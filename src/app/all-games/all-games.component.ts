@@ -5,7 +5,11 @@ import { AuthenticationService } from '../services/authentication.service';
 import { ModelModule } from '../model/model.module';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { logUrls } from '../../logoUrls';
+import {logoMapping, teamMapping} from '../../constants';
+import { utcToZonedTime, format } from 'date-fns-tz';
+import { fr } from 'date-fns/locale';
+import { isTomorrow } from 'date-fns';
+import { isToday } from 'date-fns';
 
 @Component({
   selector: 'app-all-games',
@@ -16,12 +20,12 @@ import { logUrls } from '../../logoUrls';
 })
 export class AllGamesComponent {
   allGames: any[] = [];
-  logUrls = logUrls;
 
   constructor(private dataSource: RestDataSource, private authService: AuthenticationService, private router: Router) {} // Inject Router
 
   async ngOnInit() {
     this.allGames = await this.dataSource.getAllGames();
+    console.log(this.allGames);
   }
 
   async createBet(gameId: string, betAmount: string, desiredAmount: string, chosenTeam: string) {
@@ -58,5 +62,28 @@ export class AllGamesComponent {
     const hours = date.getHours();
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `le ${day}/${month}/${year} à ${hours}:${minutes}`;
+  }
+
+
+  convertUTCtoParisTime(date: Date): string {
+    const parisTimeZone = 'Europe/Paris';
+    const zonedDate = utcToZonedTime(date, parisTimeZone);
+    let formattedDay;
+    if (isToday(zonedDate)) {
+      formattedDay = 'Aujourd\'hui';
+    } else if (isTomorrow(zonedDate)) {
+      formattedDay = 'Demain';
+    } else {
+      formattedDay = format(zonedDate, 'eee d', { locale: fr });
+    }
+    const formattedTime = format(zonedDate, 'HH:mm');
+    return `${formattedDay}\n${formattedTime}`;
+  }
+
+  getUrlFromKey(key: string) {
+    return logoMapping[key as keyof typeof logoMapping];
+  }
+  getTeamFromKey(key: string) {
+    return teamMapping[key as keyof typeof teamMapping];
   }
 }
