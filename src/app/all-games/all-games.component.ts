@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, Signal, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RestDataSource } from '../model/rest.datasource';
 import { AuthenticationService } from '../services/authentication.service';
@@ -20,12 +20,40 @@ import { isToday } from 'date-fns';
 })
 export class AllGamesComponent {
   allGames: any[] = [];
-
+  sliderValues: Map<string, WritableSignal<number>> = new Map();
+  betAmounts: Map<string, WritableSignal<number>> = new Map();
+  leftPercentages: Map<string, Signal<number>> = new Map();
+  rightPercentages: Map<string, Signal<number>> = new Map();
+  leftOdds: Map<string, Signal<number>> = new Map();
+  rightOdds: Map<string, Signal<number>> = new Map();
+  potentials: Map<string, Signal<number>> = new Map();
+  oddSelecteds: Map<string, WritableSignal<'left'|'right'>> = new Map();
+  initialBetAmount = 10;
+  initalOddSelected: 'left' | 'right' = 'left';
   constructor(private dataSource: RestDataSource, private authService: AuthenticationService, private router: Router) {} // Inject Router
 
   async ngOnInit() {
     this.allGames = await this.dataSource.getAllGames();
-    console.log(this.allGames);
+    this.allGames.forEach(game => {
+      const sliderValue = signal(50);
+      const betAmount = signal(this.initialBetAmount);
+      const oddSelected = signal<'left'|'right'>(this.initalOddSelected);
+      this.sliderValues.set(game.id, sliderValue);
+      this.betAmounts.set(game.id, betAmount);
+      const leftPercentage = computed(() => sliderValue())
+      const rightPercentage = computed(() => 100-sliderValue())
+      this.leftPercentages.set(game.id, leftPercentage);
+      this.rightPercentages.set(game.id, rightPercentage);
+      const leftOdd =  computed(() => Math.ceil(100/leftPercentage() * 100)/100);
+      const rightOdd =  computed(() => Math.ceil(100/rightPercentage() * 100)/100);
+      this.leftOdds.set(game.id, leftOdd);
+      this.rightOdds.set(game.id, rightOdd);
+      this.potentials.set(game.id, computed(() => {
+        const selectedOdd = this.oddSelecteds.get(game.id)?.() === 'left' ? leftOdd() : rightOdd();
+        return Math.ceil(betAmount() * selectedOdd * 100)/100;
+      }));
+      this.oddSelecteds.set(game.id, oddSelected);
+    });
   }
 
   async createBet(gameId: string, betAmount: string, desiredAmount: string, chosenTeam: string) {
@@ -86,4 +114,20 @@ export class AllGamesComponent {
   getTeamFromKey(key: string) {
     return teamMapping[key as keyof typeof teamMapping];
   }
+
+  updateSliderValue(event: Event, gameId: string) {
+    const value = +(event.target as HTMLInputElement).value;
+    this.sliderValues.get(gameId)?.set(value);
+  }
+
+  updateBetAmount(event: Event, gameId: string) {
+    const value = +(event.target as HTMLInputElement).value;
+    this.betAmounts.get(gameId)?.set(value);
+  }
+
+  updateOddSelected(gameId: string, position: 'left'|'right') {
+    this.oddSelecteds.get(gameId)?.set(position);
+  }
+
+  protected readonly Math = Math;
 }
