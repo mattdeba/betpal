@@ -63,7 +63,7 @@
               <div class="bet-label">Gains potentiels</div>
               <div class="bet-amount">{{potentials.get(game.id)?.()}}</div>
             </div>
-            <button class="create-bet">Proposer ce pari</button>
+            <button class="create-bet" (click)='createBet(game.id)'>Proposer ce pari</button>
           </div>
         </div>
       </div>

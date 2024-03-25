@@ -27,7 +27,7 @@ export class CreateBetComponent {
 
   async ngOnInit() {
     const games = await this.dataSource.getAllGames();
-    this.allGames = games.filter((game: any) => !game.isClosed);
+    this.allGames = games.filter((game: any) => game.status !='finished');
     this.selectedGame = this.allGames.length > 0 ? this.allGames[0] : null;
   }
 

@@ -33,8 +33,8 @@ export class AllGamesComponent {
   constructor(private dataSource: RestDataSource, private authService: AuthenticationService, private router: Router) {} // Inject Router
 
   async ngOnInit() {
-    this.allGames = await this.dataSource.getAllGames();
-    this.allGames.forEach(game => {
+      this.allGames = (await this.dataSource.getAllGames()).filter((g: any) => g.gameStatus != 'finished');
+      this.allGames.forEach(game => {
       const sliderValue = signal(50);
       const betAmount = signal(this.initialBetAmount);
       const oddSelected = signal<'left'|'right'>(this.initalOddSelected);
@@ -56,19 +56,20 @@ export class AllGamesComponent {
     });
   }
 
-  async createBet(gameId: string, betAmount: string, desiredAmount: string, chosenTeam: string) {
+  async createBet(gameId: string) {
     try {
       const user = this.authService.getUser();
       if (!user) {
         alert("veuillez vous connecter");
       }
       const currentGame = this.allGames.filter((g) => g.id === gameId)[0];
+      const chosenTeam = this.oddSelecteds.get(gameId)?.() === 'left' ? currentGame.homeTeam : currentGame.awayTeam;
       if (user) {
         const payload = {
           gameId,
-          amount: +betAmount,
-          target: +desiredAmount,
-          chosenTeam,
+          amount: this.betAmounts.get(gameId)?.(),
+          target: this.potentials.get(gameId)?.(),
+          chosenTeam: chosenTeam,
           creatorEmail: user.email,
           homeTeamWinner: chosenTeam === currentGame.homeTeam,
           assertion: `Victoire de ${currentGame.homeTeam} contre ${currentGame.awayTeam} ${this.formatDate(currentGame.dateTimeUTC)}`
