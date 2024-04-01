@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationService } from '../services/authentication.service';
 import { RestDataSource } from '../model/rest.datasource';
 import { ModelModule } from '../model/model.module';
+import { logoMapping, teamMapping } from '../../constants';
+import { format, utcToZonedTime } from 'date-fns-tz';
+import { isToday, isTomorrow } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
 @Component({
   selector: 'app-all-bets',
@@ -43,4 +47,28 @@ export class AllBetsComponent {
       console.error('Error accepting bet:', error);
     }
   }
+
+
+  getUrlFromKey(key: string) {
+    return logoMapping[key as keyof typeof logoMapping];
+  }
+  getTeamFromKey(key: string) {
+    return teamMapping[key as keyof typeof teamMapping];
+  }
+
+  convertUTCtoParisTime(date: Date): string {
+    const parisTimeZone = 'Europe/Paris';
+    const zonedDate = utcToZonedTime(date, parisTimeZone);
+    let formattedDay;
+    if (isToday(zonedDate)) {
+      formattedDay = 'Aujourd\'hui';
+    } else if (isTomorrow(zonedDate)) {
+      formattedDay = 'Demain';
+    } else {
+      formattedDay = format(zonedDate, 'eee d', { locale: fr });
+    }
+    const formattedTime = format(zonedDate, 'HH:mm');
+    return `${formattedDay}\n${formattedTime}`;
+  }
+
 }

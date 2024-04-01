@@ -1,17 +1,63 @@
-<div class='main-content'>
-  <h2>Tous les paris</h2>
-  <div *ngIf="allBets.length > 0">
-    <ul class="bet-list">
-      <li *ngFor="let bet of allBets" class="bet-item">
-        <h3>Pari #{{bet.id}}: {{ bet.assertion }}</h3>
-        <p>Montant: {{ bet.amount }}</p>
-        <p>Cible: {{ bet.target }}</p>
-        <p>Assertion correcte: {{ bet.assertionCorrect === null ? 'A venir' : (bet.assertionCorrect ? 'Oui' : 'Non') }}</p>
-        <p>Fermé: {{ bet.closed ? 'Oui' : 'Non' }}</p>
-        <p>Créé par: {{ bet.createdBy ? bet.createdBy.firstName + ' ' + bet.createdBy.lastName : '' }}</p>
-        <p>Accepté par: {{ bet.acceptedBy ? bet.acceptedBy.firstName + ' ' + bet.acceptedBy.lastName : 'Pas encore accepté' }}</p>
-        <button *ngIf="!bet.acceptedBy" (click)="acceptBet(bet.id)">Accepter</button>
-      </li>
-    </ul>
-  </div>
+<h2>Paris proposés</h2>
+<div class="all-games">
+  <ul *ngIf="allBets.length > 0">
+    <li *ngFor="let bet of allBets">
+      <div class="game-container">
+        <div class="user-container">Proposé par {{bet.createdBy.firstName}}</div>
+        <div class="match-container">
+          <div class="team left-team">
+            <img src="{{getUrlFromKey(bet.game.homeTeam)}}" alt="Miami Heat Logo" class="team-logo">
+            <div class="team-info">
+              <div class="team-name">{{getTeamFromKey(bet.game.homeTeam)}}</div>
+            </div>
+          </div>
+
+          <div class="match-info">
+            <div class="time">{{convertUTCtoParisTime(bet.game.dateTimeUTC)}}</div>
+          </div>
+
+          <div class="team right-team">
+            <img src="{{getUrlFromKey(bet.game.awayTeam)}}" alt="Detroit Pistons Logo" class="team-logo">
+            <div class="team-info">
+              <div class="team-name">{{getTeamFromKey(bet.game.awayTeam)}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bet-container">
+          <div class="ratio-container">
+            <div class="amount-container">
+              <div class="ratio-bottom">
+                <div class="left">
+                  <button [ngClass]="{'selected': bet.homeTeamWinner === false}" *ngIf="bet.homeTeamWinner === false">
+                    {{bet.target/bet.amount | number:'1.2-2'}}
+                  </button>
+                </div>
+                <div class="center-item-bottom"></div>
+                <div class="right">
+                  <button [ngClass]="{'selected': bet.homeTeamWinner === true}" *ngIf="bet.homeTeamWinner === true">
+                    {{bet.target/(bet.target-bet.amount) | number:'1.2-2'}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bet-slip">
+            <div class="bet-section input-section">
+              <div class="bet-label">Mise</div>
+              <div class="bet-input-container">
+                <div type="number" class="bet-input">{{bet.target-bet.amount | number:'1.2-2'}}</div>
+                <div class="bet-unit">€</div>
+              </div>
+            </div>
+            <div class="bet-section">
+              <div class="bet-label">Gains potentiels</div>
+              <div class="bet-amount">{{bet.target | number:'1.2-2'}}€</div>
+            </div>
+            <button class="accept-bet" (click)='acceptBet(bet.id)' [disabled]="bet.acceptedBy!==null">Accepter ce pari</button>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
